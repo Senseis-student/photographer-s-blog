@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}Portfolio{%endblock%}
+
+{%block head%}
+{%endblock%}
+
+{%block body%}
+<div class="container">
+<hr>
+<p style="color: black; font-size: 1.2em">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet tellus gravida, tincidunt mauris vel, feugiat est. Nullam posuere eget nisi id placerat. Suspendisse potenti. Morbi quis aliquet sapien, a semper augue. Curabitur sit amet ligula sed nunc aliquam hendrerit. Vestibulum venenatis ligula leo, in mollis enim mattis non. Duis porta ipsum tortor, quis feugiat nibh consequat quis. Quisque eget efficitur nibh, ultricies pretium lorem.</p>
+<br>
+<p style="color: black; font-size: 1.2em">Nunc tempus fringilla tortor id finibus. Aenean tempus velit ligula, in faucibus leo venenatis vel. Aliquam erat volutpat. Duis viverra, orci eget bibendum malesuada, quam risus blandit est, a consequat lorem dolor finibus orci. Integer vel ante ut diam tempor scelerisque sed vel purus. Fusce feugiat ut tortor sit amet elementum. Phasellus lacinia vehicula ultricies. Nulla tortor nisi, ultrices ut odio in, congue viverra arcu. Maecenas et ex et erat congue varius quis in lorem. Vestibulum mollis metus non tristique imperdiet. Curabitur venenatis viverra nisl vel rhoncus. Sed nibh nulla, ultrices id tristique vel, tempor sit amet nunc. In hac habitasse platea dictumst. Nullam eget ante iaculis, varius turpis id, dapibus purus. Proin velit eros, porta vel erat ut, lobortis tempor dolor. In vitae tincidunt quam, commodo suscipit metus.</p>
+<hr>
+<center>
+<div class="row">
+    {% for i in projects %}
+    <div class="col-lg-3">
+    <div class="card" style="width: 18rem; margin: 20px;">
+    <img src="{{ i.main_img.url }}" class="card-img-top" style="height: 16rem; object-fit: cover;">
+    <div class="card-body">
+    <h5 class="card-title">{{ i.title }}</h5>
+    <hr>
+    <p class="card-text" align="left">{{ i.description }}</p>
+    <div class="d-grid gap-2">
+    </div>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+</center>
+
+<center><h3>Оставьте заявку на фотосессию</h3>
+<div class="row g-3">
+<form method="POST" action="{% url 'add_form' %}" name='form_send' id='form_send'>
+  {% csrf_token %}
+  <div class="mb-3">
+    <div class="col-3">
+    <label for="exampleInputEmail1" class="form-label">Имя</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{profile_data.name}}" name="name">
+  </div>
+  </div>
+  <div class="mb-3">
+    <div class="col-3">
+    <label for="exampleInputEmail11" class="form-label">Фамилия</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" value="{{profile_data.surname}}" name="surname">
+  </div>
+  </div>
+  <div class="mb-3">
+    <div class="col-3">
+    <label for="exampleInputEmail1" class="form-label">Email</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{profile_data.name}}" name="email">
+  </div>
+  </div>
+  <div class="mb-3">
+    <div class="col-3">
+    <label for="exampleInputEmail1" class="form-label">Номер телефона</label>
+    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="{{profile_data.name}}" name="number">
+  </div>
+  </div>
+  <div class="mb-3">
+  <div class="col-3">
+  <div class="input-group">
+  <span class="input-group-text">Описание</span>
+  <textarea type="text" class="form-control" aria-label="With textarea" value="{{profile_data.description}}" name="description"></textarea>
+  </div>
+  </div>
+  </div>
+  <button form='form_send' type="submit" name="save" class="btn btn-dark">Отправить</button>
+</form>
+</div>
+</div>
+</center>
+{%endblock%}
+

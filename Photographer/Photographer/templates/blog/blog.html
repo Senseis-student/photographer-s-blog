@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{%load static%}
+{%block title%}Blog{%endblock%}
+
+{%block head%}
+{%endblock%}
+
+{%block body%}
+<center><div class="container">
+<div class="row">
+    {% for el in post_list %}
+    <div class="col-lg-3">
+    <div class="card" style="width: 18rem; margin: 20px;">
+    <img src="{{el.img.url}}" class="card-img-top" style="height: 16rem; object-fit: cover;">
+    <div class="card-body">
+    <h5 class="card-title">{{el.title}}</h5>
+    <hr>
+    <p class="card-text" align="left">{{el.description}}</p>
+    <div class="d-grid gap-2">
+    <a href="{% url 'view_post' el.id %}" class="btn btn-dark">Читать</a>
+    </div>
+    <hr>
+    <p class="card-text">{{el.data}}</p>
+    </div>
+    </div>
+    </div>
+    {% endfor %}
+</div>
+</div></center>
+{%endblock%}
